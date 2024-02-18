@@ -1,5 +1,5 @@
-import { Button } from '@/components/ui/button';
+import { Button } from '@/_components/ui/button';
 
 export default function Home() {
-  return <Button size="sm">CLick me</Button>;
+  return <Button size="sm">Click me</Button>;
 }

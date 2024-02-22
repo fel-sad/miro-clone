@@ -11,7 +11,7 @@ import { Link2, Pencil, Trash2 } from 'lucide-react';
 import { toast } from 'sonner';
 import { useApiMutation } from '@/hooks/use-api-mutation';
 import { api } from '@/convex/_generated/api';
-import { ConfirmModal } from './ui/confirm-modal';
+import { ConfirmModal } from './confirm-modal';
 import { Button } from './ui/button';
 import { useRenameModal } from '@/store/use-rename-modal';
 

@@ -33,7 +33,6 @@ import { nanoid } from 'nanoid';
 import { LiveObject } from '@liveblocks/client';
 import { LayerPreview } from './layer-preview';
 import { SelectionBox } from './selection-box';
-import { set } from 'date-fns';
 import { SelectionTools } from './selection-tools';
 
 const MAX_LAYERS = 100;
@@ -188,16 +187,19 @@ export const Canvas = ({ boardId }: CanvasProps) => {
     setMyPresence({ cursor: null });
   }, []);
 
-  const onPointerDown = useCallback((e: React.PointerEvent) => {
-    const point = pointerEventToCanvasPoint(e, camera);
+  const onPointerDown = useCallback(
+    (e: React.PointerEvent) => {
+      const point = pointerEventToCanvasPoint(e, camera);
 
-    if (canvasState.mode === CanvasMode.Inserting) {
-      return;
-    }
+      if (canvasState.mode === CanvasMode.Inserting) {
+        return;
+      }
 
-    setCanvasState({ origin: point, mode: CanvasMode.Pressing }),
-      [camera, canvasState.mode, setCanvasState];
-  }, []);
+      setCanvasState({ origin: point, mode: CanvasMode.Pressing }),
+        [camera, canvasState.mode, setCanvasState];
+    },
+    [camera, canvasState]
+  );
 
   const onPointerUp = useMutation(
     ({}, e) => {

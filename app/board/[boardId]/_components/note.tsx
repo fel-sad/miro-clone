@@ -46,6 +46,7 @@ export const Note = ({
       width={width}
       height={height}
       onPointerDown={(e) => onPointerDown(e, id)}
+      fill={fill ? colorToCss(fill) : '#CCC'}
       style={{
         outline: selectionColor ? `1px solid ${selectionColor}` : 'none',
         backgroundColor: fill ? colorToCss(fill) : '#000',

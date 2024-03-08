@@ -15,7 +15,7 @@ export const get = query({
       throw new Error('Unauthorized');
     }
 
-    if (args.favorites) {
+    if (args.favorites != 'null') {
       const favoritedBoards = await ctx.db
         .query('userFavorites')
         .withIndex('by_user_org', (q) =>
@@ -37,7 +37,7 @@ export const get = query({
     const title = args.search as string;
     let boards = [];
 
-    if (title) {
+    if (title != 'null') {
       boards = await ctx.db
         .query('board')
         .withSearchIndex('search_title', (q) =>

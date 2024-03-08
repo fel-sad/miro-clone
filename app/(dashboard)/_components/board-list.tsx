@@ -17,13 +17,15 @@ interface BoardListProps {
 }
 
 export const BoardList = ({ orgId, query }: BoardListProps) => {
-  const data = useQuery(api.boards.get, { orgId, ...query });
+  const search = query?.search;
+  const favorites = query?.favorites;
+  const data = useQuery(api.boards.get, { orgId, search, favorites });
 
   if (data === undefined) {
     return (
       <div>
         <h2 className="text-3xl">
-          {query.favorites ? 'Favorite Boards' : 'Team Boards'}
+          {favorites == 'true' ? 'Favorite Boards' : 'Team Boards'}
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-5 mt-8 pb-10">
           <NewBoardButton orgId={orgId} disabled />
@@ -38,11 +40,11 @@ export const BoardList = ({ orgId, query }: BoardListProps) => {
     );
   }
 
-  if (!data?.length && query.search) {
+  if (!data?.length && search != 'null') {
     return <EmptySearch />;
   }
 
-  if (!data?.length && query.favorites) {
+  if (!data?.length && favorites != 'null') {
     return <EmptyFavorites />;
   }
 
@@ -53,7 +55,7 @@ export const BoardList = ({ orgId, query }: BoardListProps) => {
   return (
     <div>
       <h2 className="text-3xl">
-        {query.favorites ? 'Favorite Boards' : 'Team Boards'}
+        {favorites == 'true' ? 'Favorite Boards' : 'Team Boards'}
       </h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-5 mt-8 pb-10">
         <NewBoardButton orgId={orgId} />
